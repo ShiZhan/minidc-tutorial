@@ -10,16 +10,28 @@ Hosts:
 2. node2: 192.168.33.22
 3. node3: 192.168.33.23
 
+To prepare or regenerate key pair:
+
+```bash
+ssh-keygen -f insecure-key
+```
+
 SSH access:
 
 ```bash
 ssh -i insecure-key vagrant@{IP}
 ```
 
-To regenerate key pair:
+Ignore host checking during first time login (potential MITM attack):
 
 ```bash
-ssh-keygen -f insecure-key
+ssh -i insecure-key -o StrictHostKeyChecking=no vagrant@{IP}
+```
+
+Furthermore, force no password input:
+
+```bash
+ssh -i insecure-key -o StrictHostKeyChecking=no -o PasswordAuthentication=no vagrant@{IP}
 ```
 
 Then VMs should be re-created to apply new keys.

@@ -13,7 +13,7 @@ Hosts:
 To prepare or regenerate key pair:
 
 ```bash
-ssh-keygen -f insecure-key
+ssh-keygen -f insecure-key -N ''
 ```
 
 SSH access:

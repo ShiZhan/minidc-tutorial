@@ -3,7 +3,7 @@
 
 Vagrant.configure("2") do |config|
   config.vm.box = "envimation/ubuntu-xenial-docker"
-  config.vm.box_version = "1.0.0-1501809231"
+  config.vm.box_version = "1.0.0-1502068394"
   config.vm.box_check_update = false
   config.vm.provider "virtualbox" do |vb|
     vb.memory = "1024"

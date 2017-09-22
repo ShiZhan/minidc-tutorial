@@ -10,6 +10,36 @@ Hosts:
 2. node2: 192.168.33.22
 3. node3: 192.168.33.23
 
+To download base image directly:
+
+[refernece](https://stackoverflow.com/questions/24958110/download-vagrant-box-from-vagrantcloud-com)
+
+To manage metadata for downloaded box files:
+
+[reference](https://stackoverflow.com/questions/32607741/vagrant-setup-virtualbox-name-with-box-version-from-json-file)
+
+Example:
+
+```json
+{
+  "name": "envimation/ubuntu-xenial-docker",
+  "description": "This box contains Ubuntu 16.04 LTS 64-bit with docker.",
+  "versions": [{
+    "version": "1.0.0-1502068394",
+    "providers": [{
+      "name": "virtualbox",
+      "url": "ubuntu-xenial-docker.box"
+    }]
+  }]
+}
+```
+
+Add downloaded box by metadata:
+
+```bash
+vagrant box add foo.json
+```
+
 To prepare or regenerate key pair:
 
 ```bash

@@ -16,6 +16,10 @@ To download base image directly:
 
 [refernece](https://stackoverflow.com/questions/24958110/download-vagrant-box-from-vagrantcloud-com)
 
+Example, the one used in this Vagrant project:
+
+[Download URL](https://app.vagrantup.com/envimation/boxes/ubuntu-xenial-docker/versions/1.0.0-1502068394/providers/virtualbox.box)
+
 To manage metadata for downloaded box files:
 
 [reference](https://stackoverflow.com/questions/32607741/vagrant-setup-virtualbox-name-with-box-version-from-json-file)
@@ -42,15 +46,57 @@ Add downloaded box by metadata:
 vagrant box add foo.json
 ```
 
-## SSH Made Easy
+Check it out:
 
-To prepare or regenerate key pair:
+```bash
+vagrant box list
+```
+
+## A Brief Course for Newbies
+
+### Hello World!
+
+The 1st run:
+
+```bash
+mkdir hello
+cd hello
+vagrant init envimation/ubuntu-xenial-docker
+vagrant up
+vagrant status
+vagrant ssh default
+# enjoy the newly created virtual machine
+exit
+vagrant halt
+vagrant status
+vagrant destroy
+```
+
+### Name it!
+
+TODO
+
+### CPU and Memory
+
+TODO
+
+### Network
+
+TODO
+
+### Provision
+
+TODO
+
+### SSH Made Easy
+
+To prepare or regenerate your own key pair:
 
 ```bash
 ssh-keygen -f insecure-key -N ''
 ```
 
-SSH access:
+SSH access by key pair:
 
 ```bash
 ssh -i insecure-key vagrant@{IP}
@@ -70,8 +116,14 @@ ssh -i insecure-key -o StrictHostKeyChecking=no -o PasswordAuthentication=no vag
 
 Then VMs should be re-created to apply new keys.
 
-## Scale up to 4 physical hosts with 120 virtual machines
+## 3 Virtual Machine Cluster
 
-Refer to Vagrantfile-cross-host-cluster-00{1..4}
+Project resides in current directory, refer to [Vagrantfile](./Vagrantfile).
+
+## Scale Out to 4 Physical Hosts with 120 Virtual Machines
+
+Refer to cluster-120/Vagrantfile-00{1..4}.
+
+TODO: use command line augments to unify physical cluster configuration.
 
 Zhan.Shi @ 2017

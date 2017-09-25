@@ -10,6 +10,8 @@ Hosts:
 2. node2: 192.168.33.22
 3. node3: 192.168.33.23
 
+All machines are connected by a host-only network.
+
 ## Get and Manage Boxes
 
 To download base image directly:
@@ -56,39 +58,29 @@ vagrant box list
 
 ### Hello World!
 
-The 1st run:
-
-```bash
-mkdir hello
-cd hello
-vagrant init envimation/ubuntu-xenial-docker
-vagrant up
-vagrant status
-vagrant ssh default
-# enjoy the newly created virtual machine
-exit
-vagrant halt
-vagrant status
-vagrant destroy
-```
+The 1st run [course-1](course-1/README.md).
 
 ### Name it!
 
-TODO
+Name the virtual machine [course-2](course-2/README.md).
 
 ### CPU and Memory
 
-TODO
+Set CPU cores and memory (using VirtualBox provider) [course-3](course-3/README.md).
 
-### Network
+### Private Network
 
-TODO
+Add a host-only network [course-4](course-4/README.md).
+
+### Public Network
+
+Bridge to chosen host network [course-5](course-5/README.md).
 
 ### Provision
 
-TODO
+Do something more to prepare the virtual machine [course-6](course-6/README.md).
 
-### SSH Made Easy
+## SSH Made Easy
 
 To prepare or regenerate your own key pair:
 
@@ -123,6 +115,8 @@ Project resides in current directory, refer to [Vagrantfile](./Vagrantfile).
 ## Scale Out to 4 Physical Hosts with 120 Virtual Machines
 
 Refer to cluster-120/Vagrantfile-00{1..4}.
+
+All machines are connected through bridged network, for virtual machine inter-connection accross hosts.
 
 TODO: use command line augments to unify physical cluster configuration.
 

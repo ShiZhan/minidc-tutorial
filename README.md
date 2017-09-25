@@ -10,6 +10,8 @@ Hosts:
 2. node2: 192.168.33.22
 3. node3: 192.168.33.23
 
+## Get and Manage Boxes
+
 To download base image directly:
 
 [refernece](https://stackoverflow.com/questions/24958110/download-vagrant-box-from-vagrantcloud-com)
@@ -40,6 +42,8 @@ Add downloaded box by metadata:
 vagrant box add foo.json
 ```
 
+## SSH Made Easy
+
 To prepare or regenerate key pair:
 
 ```bash
@@ -65,5 +69,9 @@ ssh -i insecure-key -o StrictHostKeyChecking=no -o PasswordAuthentication=no vag
 ```
 
 Then VMs should be re-created to apply new keys.
+
+## Scale up to 4 physical hosts with 120 virtual machines
+
+Refer to Vagrantfile-cross-host-cluster-00{1..4}
 
 Zhan.Shi @ 2017

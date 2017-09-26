@@ -8,6 +8,8 @@ In virtual machine dedicated section, add:
     SHELL
 ```
 
+[Result](./Vagrantfile)
+
 Then, use ssh to login, in the welcome screen, you'll see *This is course demo project*.
 
 For more information, this is the [portal](https://www.vagrantup.com/docs/) leads to official site.

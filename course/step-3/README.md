@@ -9,6 +9,17 @@ Check Vagrantfile, compare to [step-2](../step-2/README.md), the following lines
   end
 ```
 
+[Result](./Vagrantfile)
+
 Which tells the virtualbox provider to allocate just 1 CPU core and 1GB main memory for every virtual machine.
+
+Log in, and check:
+
+```bash
+lscpu             # show CPU information
+cat /proc/cpuinfo # alternate method
+free -h           # show memory information
+cat /proc/meminfo # alternate method
+```
 
 Zhan.Shi @ 2017

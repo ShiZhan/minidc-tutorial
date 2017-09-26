@@ -8,7 +8,9 @@ In virtual machine specific section.
     demo.vm.network "private_network", ip: "192.168.33.2"
 ```
 
-Use ssh to connect from host:
+[Result](./Vagrantfile)
+
+Use ssh or any typical terminal software (putty, xshell) to connect this IP address from host:
 
 ```bash
 ssh vagrant@192.168.33.2

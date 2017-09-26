@@ -58,27 +58,27 @@ vagrant box list
 
 ### Hello World!
 
-The 1st run [course-1](course-1/README.md).
+The 1st run [step-1](course/step-1/README.md).
 
 ### Name it!
 
-Name the virtual machine [course-2](course-2/README.md).
+Name the virtual machine [step-2](course/step-2/README.md).
 
 ### CPU and Memory
 
-Set CPU cores and memory (using VirtualBox provider) [course-3](course-3/README.md).
+Set CPU cores and memory (using VirtualBox provider) [step-3](course/step-3/README.md).
 
 ### Private Network
 
-Add a host-only network [course-4](course-4/README.md).
+Add a host-only network [step-4](course/step-4/README.md).
 
 ### Public Network
 
-Bridge to chosen host network [course-5](course-5/README.md).
+Bridge to chosen host network [step-5](course/step-5/README.md).
 
 ### Provision
 
-Do something more to prepare the virtual machine [course-6](course-6/README.md).
+Do something more to prepare the virtual machine [step-6](course/step-6/README.md).
 
 ## SSH Made Easy
 

@@ -1,0 +1,6 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "envimation/ubuntu-xenial-docker"
+  config.vm.define "course_demo" do |demo|
+    # settings dedicated to this virtual machine
+  end
+end

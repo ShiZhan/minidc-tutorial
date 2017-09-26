@@ -1,4 +1,4 @@
-# Introduction
+# Hello World!
 
 1. Ensure the required box is installed.
 
@@ -6,7 +6,7 @@
 vagrant box list # 'envimation/ubuntu-xenial-docker' should appear.
 ```
 
-2. Ensure you are in directory *course-1*.
+2. Ensure you are in directory *step-1*.
 
 ```bash
 pwd # check current directory

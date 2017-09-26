@@ -114,9 +114,9 @@ Project resides in current directory, refer to [Vagrantfile](./Vagrantfile).
 
 ## Scale Out to 4 Physical Hosts with 120 Virtual Machines
 
-Refer to cluster-120/Vagrantfile-00{1..4}.
+Refer to [cluster-120/Vagrantfile-00{1..4}](cluster/).
 
-All machines are connected through bridged network, for virtual machine inter-connection accross hosts.
+All machines are connected through bridged network, thus became public accessible.
 
 TODO: use command line augments to unify physical cluster configuration.
 

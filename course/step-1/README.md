@@ -16,7 +16,7 @@ ls  # and it should contain just the README.md
 3. Generate Vagrantfile.
 
 ```bash
-vagrant init
+vagrant init envimation/ubuntu-xenial-docker
 ```
 
 4. Check before firing up.

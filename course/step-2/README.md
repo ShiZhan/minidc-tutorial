@@ -22,7 +22,7 @@ end
 
 ```bash
 pwd # ensure you are in directory *course-2*
-sed -e '/^ *#/d' -e '/^$/d' ../course-1/Vagrantfile > Vagrantfile
+sed -e '/^ *#/d' -e '/^$/d' ../step-1/Vagrantfile > Vagrantfile
 ```
 
 3. Add the following line before 'end'.

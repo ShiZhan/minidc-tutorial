@@ -1,9 +1,16 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+data_host     = "./data"
+data_guest    = "/vagrant_data"
+pkgs_host     = "./packages"
+pkgs_guest    = "/packages"
+path_collectl = "#{pkgs_guest}/collectl_4.0.4-1_all.deb"
+url_collectl  = "http://archive.ubuntu.com/ubuntu/pool/universe/c/collectl/collectl_4.0.4-1_all.deb"
+
 Vagrant.configure("2") do |config|
-  config.vm.box = "envimation/ubuntu-xenial-docker"
-  config.vm.box_version = "1.0.0-1502068394"
+  config.vm.box = "envimation/ubuntu-xenial"
+  config.vm.box_version = "1.0.3-1516241473"
   config.vm.box_check_update = false
   config.vm.provider "virtualbox" do |vb|
     vb.memory = "1024"
@@ -20,9 +27,25 @@ Vagrant.configure("2") do |config|
     config.vm.define "node#{i}" do |node|
       node.vm.network "private_network", ip: "192.168.33.#{i + IP0}"
       node.vm.hostname = "node#{i}"
-      node.vm.synced_folder "./data", "/vagrant_data", create: true, owner: "root", group: "root"
+
+      node.vm.synced_folder "#{data_host}", "#{data_guest}", create: true, owner: "root", group: "root"
+      node.vm.synced_folder "#{pkgs_host}", "#{pkgs_guest}", create: true, owner: "root", group: "root"
+
+      node.vm.provision "file", source: "conf/", destination: "/home/vagrant/conf"
       node.vm.provision "shell", inline: <<-SHELL
         echo "This is node#{i}" > /etc/motd
+        
+        mv /etc/hosts /etc/hosts.bak
+        cp /home/vagrant/conf/hosts /etc/hosts
+
+        mv /etc/apt/sources.list /etc/apt/sources.list.bak
+        cp /home/vagrant/conf/sources.list /etc/apt/sources.list
+        apt-get update && apt-get install -yq pciutils libtime-hires-perl libio-compress-perl
+
+        set -x
+        [ -f #{path_collectl} ] || wget #{url_collectl} -o #{path_collectl}
+        dpkg -i #{path_collectl}
+
       SHELL
     end
   end

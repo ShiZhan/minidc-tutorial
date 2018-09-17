@@ -2,8 +2,8 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "envimation/ubuntu-xenial-docker"
-  config.vm.box_version = "1.0.0-1502068394"
+  config.vm.box = "envimation/ubuntu-xenial"
+  config.vm.box_version = "1.0.3-1516241473"
   config.vm.box_check_update = false
   config.vm.provider "virtualbox" do |vb|
     vb.memory = "1024"
@@ -15,14 +15,14 @@ Vagrant.configure("2") do |config|
   config.vm.provision "file", source: "./insecure-key", destination: "/home/vagrant/.ssh/id_rsa"
   config.vm.provision 'shell', inline: "chmod 400 /home/vagrant/.ssh/id_rsa"
 
-  IP0 = 100
+  IP0 = 0
   (1..30).each do |i|
 #  (31..60).each do |i|
 #  (61..90).each do |i|
 #  (91..120).each do |i|
 
     config.vm.define "node#{i}" do |node|
-      node.vm.network "public_network", ip: "10.0.0.#{i + IP0}", :netmask => "255.255.255.0", :bridge => 'enp2s0f0'
+      node.vm.network "public_network", ip: "192.168.137.#{i + IP0}", :netmask => "255.255.255.0", :bridge => 'eno1'
       node.vm.hostname = "node#{i}"
       node.vm.synced_folder "./data", "/vagrant_data",
         create: true, owner: "root", group: "root"

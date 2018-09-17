@@ -1,0 +1,69 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+data_host     = "./data"
+data_guest    = "/var/lib/influxdb"
+pkgs_host     = "./packages"
+pkgs_guest    = "/packages"
+path_influxdb = "#{pkgs_guest}/influxdb_1.4.1_amd64.deb"
+path_grafana  = "#{pkgs_guest}/grafana_4.6.1_amd64.deb"
+url_influxdb  = "https://dl.influxdata.com/influxdb/releases/influxdb_1.4.1_amd64.deb"
+url_grafana   = "https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana_4.6.1_amd64.deb"
+
+Vagrant.configure("2") do |config|
+  config.vm.define "cm" do |cm|
+    # base image
+    cm.vm.box = "envimation/ubuntu-xenial"
+    cm.vm.box_version = "1.0.3-1516241473"
+    cm.vm.box_check_update = false
+
+    # virtual hardware definition
+    cm.vm.provider "virtualbox" do |vb|
+      vb.memory = "1024"
+      vb.cpus = 1
+    end
+
+    # network
+    cm.vm.hostname = "controller-machine"
+    cm.vm.network "public_network", ip: "192.168.137.127", :netmask => "255.255.255.0"#, :bridge => '<physical host interface>'
+
+    # web ui
+    cm.vm.network "forwarded_port", guest: 3000, host: 3000
+
+    # sync folder
+    cm.vm.synced_folder "#{data_host}", "#{data_guest}", create: true, owner: "root", group: "root", mount_options: ["dmode=777", "fmode=666"]
+    cm.vm.synced_folder "#{pkgs_host}", "#{pkgs_guest}", create: true, owner: "root", group: "root" 
+
+    # configurations
+    cm.vm.provision "file", source: "conf/", destination: "/home/vagrant/conf"
+    cm.vm.provision "shell", inline: <<-SHELL
+      echo 'Controller machine based on ubuntu-xenial vagrant box' > /etc/motd
+
+      mv /etc/hosts /etc/hosts.bak
+      cp /home/vagrant/conf/hosts /etc/hosts
+
+      mv /etc/apt/sources.list /etc/apt/sources.list.bak
+      cp /home/vagrant/conf/sources.list /etc/apt/sources.list
+      apt-get update && apt-get -yq install libfontconfig
+
+      set -x
+      [ -f #{path_influxdb} ] || wget #{url_influxdb} -o #{path_influxdb}
+      [ -f #{path_grafana} ]  || wget #{url_grafana}  -o #{path_grafana}
+      dpkg -i #{path_influxdb} && dpkg -i #{path_grafana}
+
+      sed -i \
+        -e "s/;reporting_enabled = true/reporting_enabled = false/g" \
+        -e "s/;check_for_updates = true/check_for_updates = false/g" \
+        -e "s/;login_remember_days = .*/login_remember_days = 365/g" \
+        /etc/grafana/grafana.ini
+      sed -i \
+        -e "s/# reporting-disabled = false/reporting-disabled = true/g" \
+        -e "s/^\[\[graphite\]\]$/\[\[graphite\]\]\\n  enabled = true/g" \
+        /etc/influxdb/influxdb.conf
+      systemctl enable grafana-server.service
+      systemctl enable influxdb.service
+      systemctl start grafana-server.service
+      systemctl start influxdb.service
+    SHELL
+  end
+end

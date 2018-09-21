@@ -16,11 +16,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision 'shell', inline: "chmod 400 /home/vagrant/.ssh/id_rsa"
 
   IP0 = 0
-  (1..30).each do |i|
-#  (31..60).each do |i|
-#  (61..90).each do |i|
-#  (91..120).each do |i|
-
+  (1..120).each do |i|
     config.vm.define "node#{i}" do |node|
       node.vm.network "public_network", ip: "192.168.137.#{i + IP0}", :netmask => "255.255.255.0", :bridge => 'eno1'
       node.vm.hostname = "node#{i}"

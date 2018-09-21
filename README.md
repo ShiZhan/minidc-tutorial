@@ -20,7 +20,7 @@ To download base image directly:
 
 Example, the one used in this Vagrant project:
 
-[Download URL](https://app.vagrantup.com/envimation/boxes/ubuntu-xenial-docker/versions/1.0.0-1502068394/providers/virtualbox.box)
+[Download URL](https://app.vagrantup.com/envimation/boxes/ubuntu-xenial-docker/versions/1.0.0-1516241473/providers/virtualbox.box)
 
 To manage metadata for downloaded box files:
 
@@ -33,7 +33,7 @@ Example:
   "name": "envimation/ubuntu-xenial-docker",
   "description": "This box contains Ubuntu 16.04 LTS 64-bit with docker.",
   "versions": [{
-    "version": "1.0.0-1502068394",
+    "version": "1.0.0-1516241473",
     "providers": [{
       "name": "virtualbox",
       "url": "ubuntu-xenial-docker.box"
@@ -114,7 +114,7 @@ Project resides in current directory, refer to [Vagrantfile](./Vagrantfile).
 
 ## Scale Out to 4 Physical Hosts with 120 Virtual Machines
 
-Refer to [cluster-120/Vagrantfile-00{1..4}](cluster-120/).
+Refer to [Vagrantfile-001..120}].
 
 All machines are connected through bridged network, thus became public accessible.
 

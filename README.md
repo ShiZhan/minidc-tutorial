@@ -114,7 +114,7 @@ Project resides in current directory, refer to [Vagrantfile](./Vagrantfile).
 
 ## Scale Out to 4 Physical Hosts with 120 Virtual Machines
 
-Refer to [Vagrantfile-001..120}].
+Refer to Vagrantfile-{001-030, 031-060, 061-090 and 091-120}.
 
 All machines are connected through bridged network, thus became public accessible.
 

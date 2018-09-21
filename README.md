@@ -114,10 +114,12 @@ Project resides in current directory, refer to [Vagrantfile](./Vagrantfile).
 
 ## Scale Out to 4 Physical Hosts with 120 Virtual Machines
 
-Refer to Vagrantfile-{001-030, 031-060, 061-090 and 091-120}.
+Refer to [swarm120/Vagrantfile](swarm120/Vagrantfile).
 
 All machines are connected through bridged network, thus became public accessible.
 
-TODO: use command line augments to unify physical cluster configuration.
+Use `start-vm.sh` to bring up corresponding guests.
+
+E.g.: Allocate first group of 30 guests to host1, run `./start-vm {1..30}`. Then, for host2, allocate next 30 guests by `./start-vm {31..60}`.
 
 Zhan.Shi @ 2017

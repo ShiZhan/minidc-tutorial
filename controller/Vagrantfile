@@ -1,8 +1,8 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-data_host     = "../data"
-data_guest    = "/var/lib/influxdb"
+#data_host     = "../data"
+#data_guest    = "/var/lib/influxdb"
 pkgs_host     = "../packages"
 pkgs_guest    = "/packages"
 path_influxdb = "#{pkgs_guest}/influxdb_1.4.1_amd64.deb"
@@ -37,7 +37,7 @@ Vagrant.configure("2") do |config|
     cm.vm.network "forwarded_port", guest: 2003, host: 2003, protocol: "udp" 
 
     # sync folder
-    cm.vm.synced_folder "#{data_host}", "#{data_guest}", create: true, owner: "root", group: "root", mount_options: ["dmode=777", "fmode=666"]
+#    cm.vm.synced_folder "#{data_host}", "#{data_guest}", create: true, owner: "root", group: "root", mount_options: ["dmode=777", "fmode=666"]
     cm.vm.synced_folder "#{pkgs_host}", "#{pkgs_guest}", create: true, owner: "root", group: "root" 
 
     # configurations

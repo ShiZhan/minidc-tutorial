@@ -8,6 +8,9 @@ pkgs_guest    = "/packages"
 path_collectl = "#{pkgs_guest}/collectl_4.0.4-1_all.deb"
 url_collectl  = "http://archive.ubuntu.com/ubuntu/pool/universe/c/collectl/collectl_4.0.4-1_all.deb"
 
+KEY_PUB = "./insecure-key.pub"
+KEY_PRV = "./insecure-key"
+
 Vagrant.configure("2") do |config|
   config.vm.box = "envimation/ubuntu-xenial"
   config.vm.box_version = "1.0.3-1516241473"
@@ -17,9 +20,9 @@ Vagrant.configure("2") do |config|
     vb.cpus = 1
   end
 
-  ssh_key_public  = File.readlines("./insecure-key.pub").first.strip
+  ssh_key_public  = File.readlines(KEY_PUB).first.strip
   config.vm.provision 'shell', inline: "echo #{ssh_key_public} >> /home/vagrant/.ssh/authorized_keys"
-  config.vm.provision "file", source: "./insecure-key", destination: "/home/vagrant/.ssh/id_rsa"
+  config.vm.provision "file", source: KEY_PRV, destination: "/home/vagrant/.ssh/id_rsa"
   config.vm.provision 'shell', inline: "chmod 400 /home/vagrant/.ssh/id_rsa"
 
   IP0 = 20
@@ -34,7 +37,7 @@ Vagrant.configure("2") do |config|
       node.vm.provision "file", source: "conf/", destination: "/home/vagrant/conf"
       node.vm.provision "shell", inline: <<-SHELL
         echo "This is node#{i}" > /etc/motd
-        
+
         mv /etc/hosts /etc/hosts.bak
         cp /home/vagrant/conf/hosts /etc/hosts
 

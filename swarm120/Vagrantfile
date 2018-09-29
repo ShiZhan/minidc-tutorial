@@ -1,6 +1,9 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+KEY_PUB="../insecure-key.pub"
+KEY_PRV="../insecure-key"
+
 Vagrant.configure("2") do |config|
   config.vm.box = "envimation/ubuntu-xenial"
   config.vm.box_version = "1.0.3-1516241473"
@@ -10,9 +13,9 @@ Vagrant.configure("2") do |config|
     vb.cpus = 1
   end
 
-  ssh_key_public  = File.readlines("./insecure-key.pub").first.strip
+  ssh_key_public  = File.readlines(KEY_PUB).first.strip
   config.vm.provision 'shell', inline: "echo #{ssh_key_public} >> /home/vagrant/.ssh/authorized_keys"
-  config.vm.provision "file", source: "./insecure-key", destination: "/home/vagrant/.ssh/id_rsa"
+  config.vm.provision "file", source: KEY_PRV, destination: "/home/vagrant/.ssh/id_rsa"
   config.vm.provision 'shell', inline: "chmod 400 /home/vagrant/.ssh/id_rsa"
 
   IP0 = 0

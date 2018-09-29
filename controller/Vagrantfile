@@ -24,7 +24,7 @@ Vagrant.configure("2") do |config|
     end
 
     # network
-    cm.vm.hostname = "controller-machine"
+    cm.vm.hostname = "controller"
     cm.vm.network "private_network", ip: "192.168.33.127"
     #cm.vm.network "public_network", ip: "192.168.137.127", :netmask => "255.255.255.0"#, :bridge => '<physical host interface>'
 
@@ -34,11 +34,11 @@ Vagrant.configure("2") do |config|
     cm.vm.network "forwarded_port", guest: 8086, host: 8086, protocol: "udp"
     cm.vm.network "forwarded_port", guest: 8088, host: 8088, protocol: "tcp"
     cm.vm.network "forwarded_port", guest: 2003, host: 2003, protocol: "tcp"
-    cm.vm.network "forwarded_port", guest: 2003, host: 2003, protocol: "udp" 
+    cm.vm.network "forwarded_port", guest: 2003, host: 2003, protocol: "udp"
 
     # sync folder
 #    cm.vm.synced_folder "#{data_host}", "#{data_guest}", create: true, owner: "root", group: "root", mount_options: ["dmode=777", "fmode=666"]
-    cm.vm.synced_folder "#{pkgs_host}", "#{pkgs_guest}", create: true, owner: "root", group: "root" 
+    cm.vm.synced_folder "#{pkgs_host}", "#{pkgs_guest}", create: true, owner: "root", group: "root"
 
     # configurations
     cm.vm.provision "file", source: "../conf/", destination: "/home/vagrant/conf"
@@ -57,15 +57,12 @@ Vagrant.configure("2") do |config|
       [ -f #{path_grafana} ]  || wget #{url_grafana}  -o #{path_grafana}
       dpkg -i #{path_influxdb} && dpkg -i #{path_grafana}
 
-      sed -i \
-        -e "s/;reporting_enabled = true/reporting_enabled = false/g" \
-        -e "s/;check_for_updates = true/check_for_updates = false/g" \
-        -e "s/;login_remember_days = .*/login_remember_days = 365/g" \
-        /etc/grafana/grafana.ini
-      sed -i \
-        -e "s/# reporting-disabled = false/reporting-disabled = true/g" \
-        -e "s/^\[\[graphite\]\]$/\[\[graphite\]\]\\n  enabled = true/g" \
-        /etc/influxdb/influxdb.conf
+      mv /etc/grafana/grafana.ini /etc/grafana/grafana.ini.bak
+      cp /home/vagrant/conf/grafana.ini /etc/grafana/grafana.ini
+
+      mv /etc/influxdb/influxdb.conf /etc/influxdb/influxdb.conf.bak
+      cp /home/vagrant/conf/influxdb.conf /etc/influxdb/influxdb.conf
+
       systemctl enable grafana-server.service
       systemctl enable influxdb.service
       systemctl start grafana-server.service

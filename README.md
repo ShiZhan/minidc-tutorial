@@ -1,14 +1,13 @@
 # Introduction
 
-3 nodes cluster, node image based on [ubuntu-xenial-docker](https://app.vagrantup.com/envimation/boxes/ubuntu-xenial-docker)
-
-With docker running on each node, this virtual cluster can support multiple distributed software configuration at ease.
+3+1 nodes cluster, node image based on [ubuntu-xenial](https://app.vagrantup.com/envimation/boxes/ubuntu-xenial)
 
 Hosts:
 
-1. node1: 192.168.33.21
-2. node2: 192.168.33.22
-3. node3: 192.168.33.23
+0. controller: 192.168.33.127
+1. node1:      192.168.33.21
+2. node2:      192.168.33.22
+3. node3:      192.168.33.23
 
 All machines are connected by a host-only network.
 
@@ -30,19 +29,19 @@ Example:
 
 ```json
 {
-  "name": "envimation/ubuntu-xenial-docker",
-  "description": "This box contains Ubuntu 16.04 LTS 64-bit with docker.",
+  "name": "envimation/ubuntu-xenial",
+  "description": "This box contains Ubuntu 16.04 LTS 64-bit.",
   "versions": [{
     "version": "1.0.0-1516241473",
     "providers": [{
       "name": "virtualbox",
-      "url": "ubuntu-xenial-docker.box"
+      "url": "ubuntu-xenial.box"
     }]
   }]
 }
 ```
 
-Add downloaded box by metadata:
+Add downloaded box using metadata file with box version (without this file, all imported box will begin versioning from 0):
 
 ```bash
 vagrant box add foo.json
@@ -108,11 +107,13 @@ ssh -i insecure-key -o StrictHostKeyChecking=no -o PasswordAuthentication=no vag
 
 Then VMs should be re-created to apply new keys.
 
-## 3 Virtual Machine Cluster
+## A Small cluster of virtual machines
 
-Project resides in current directory, refer to [Vagrantfile](./Vagrantfile).
+All 3 VMs reside in current directory, refer to [Vagrantfile](./Vagrantfile).
 
-## Scale Out to 4 Physical Hosts with 120 Virtual Machines
+1 controller VM locates in [Vagrantfile](controller/Vagrantfile).
+
+## Scale Out to multiple physical hosts with 120 Virtual Machines
 
 Refer to [swarm120/Vagrantfile](swarm120/Vagrantfile).
 
@@ -122,4 +123,4 @@ Use `start-vm.sh` to bring up corresponding guests.
 
 E.g.: Allocate first group of 30 guests to host1, run `./start-vm {1..30}`. Then, for host2, allocate next 30 guests by `./start-vm {31..60}`.
 
-Zhan.Shi @ 2017
+Zhan.Shi @ 2017, 2018

@@ -46,7 +46,7 @@ Vagrant.configure("2") do |config|
         apt-get update && apt-get install -yq pciutils libtime-hires-perl libio-compress-perl
 
         set -x
-        [ -f #{path_collectl} ] || wget #{url_collectl} -o #{path_collectl}
+        [ -f #{path_collectl} ] || wget #{url_collectl} -O #{path_collectl}
         dpkg -i #{path_collectl}
 
       SHELL

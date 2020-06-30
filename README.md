@@ -1,6 +1,6 @@
 # Introduction
 
-3+1 nodes cluster, node image based on [ubuntu-xenial](https://app.vagrantup.com/envimation/boxes/ubuntu-xenial)
+3+1 nodes cluster, node image based on [ubuntu-focal](http://cloud-images.ubuntu.com/focal/20200618/focal-server-cloudimg-amd64-vagrant.box).
 
 Hosts:
 
@@ -13,14 +13,6 @@ All machines are connected by a host-only network.
 
 ## Get and Manage Boxes
 
-To download base image directly:
-
-[refernece](https://stackoverflow.com/questions/24958110/download-vagrant-box-from-vagrantcloud-com)
-
-Example, the one used in this Vagrant project:
-
-[Download URL](https://app.vagrantup.com/envimation/boxes/ubuntu-xenial-docker/versions/1.0.0-1516241473/providers/virtualbox.box)
-
 To manage metadata for downloaded box files:
 
 [reference](https://stackoverflow.com/questions/32607741/vagrant-setup-virtualbox-name-with-box-version-from-json-file)
@@ -29,15 +21,14 @@ Example:
 
 ```json
 {
-  "name": "envimation/ubuntu-xenial",
-  "description": "This box contains Ubuntu 16.04 LTS 64-bit.",
-  "versions": [{
-    "version": "1.0.0-1516241473",
-    "providers": [{
-      "name": "virtualbox",
-      "url": "ubuntu-xenial.box"
+    "name": "ubuntu/focal64",
+    "versions": [{
+        "version": "20200618.0.0",
+        "providers": [{
+            "name": "virtualbox",
+            "url": "focal-server-cloudimg-amd64-vagrant.box"
+        }]
     }]
-  }]
 }
 ```
 
@@ -53,7 +44,7 @@ Check it out:
 vagrant box list
 ```
 
-## A Brief Course for Newbies
+## A Brief Course on Vagrant
 
 ### Hello World!
 
@@ -107,20 +98,4 @@ ssh -i insecure-key -o StrictHostKeyChecking=no -o PasswordAuthentication=no vag
 
 Then VMs should be re-created to apply new keys.
 
-## A Small cluster of virtual machines
-
-All 3 VMs reside in current directory, refer to [Vagrantfile](./Vagrantfile).
-
-1 controller VM locates in [Vagrantfile](controller/Vagrantfile).
-
-## Scale Out to multiple physical hosts with 120 Virtual Machines
-
-Refer to [swarm120/Vagrantfile](swarm120/Vagrantfile).
-
-All machines are connected through bridged network, thus became public accessible.
-
-Use `start-vm.sh` to bring up corresponding guests.
-
-E.g.: Allocate first group of 30 guests to host1, run `./start-vm {1..30}`. Then, for host2, allocate next 30 guests by `./start-vm {31..60}`.
-
-Zhan.Shi @ 2017, 2018
+Zhan.Shi @ 2017-2020

@@ -1,4 +1,6 @@
 .vagrant/*
 */.vagrant/*
 data/*
-packages/*
+packages/*.deb
+packages/*.tar
+

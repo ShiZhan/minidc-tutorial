@@ -36,7 +36,7 @@ Vagrant.configure("2") do |config|
     mv /home/vagrant/conf/sources.list /etc/apt/sources.list
 
     set -x
-    cd /packages && . ./install-packages.sh
+    cd /packages && . ./install-kubernetes.sh
     groupadd docker
     usermod -aG docker vagrant
     newgrp docker
@@ -50,6 +50,8 @@ Vagrant.configure("2") do |config|
 
     controller.vm.provision "shell", inline: <<-SHELL
       echo "This is controller" > /etc/motd
+      set -x
+      cd /packages && . ./install-controller.sh
     SHELL
   end
 
@@ -61,6 +63,8 @@ Vagrant.configure("2") do |config|
 
       node.vm.provision "shell", inline: <<-SHELL
         echo "This is node#{i}" > /etc/motd
+        set -x
+        cd /packages && . ./install-worker.sh
       SHELL
     end
   end

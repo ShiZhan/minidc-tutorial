@@ -1,4 +1,6 @@
 #!/bin/bash
 # dashboard daemon
-[ -f grafana_grafana_7.0.4.tar ]   && docker load -i grafana_grafana_7.0.4.tar   || docker pull grafana/grafana:7.0.4
-[ -f prom_prometheus_v2.19.2.tar ] && docker load -i prom_prometheus_v2.19.2.tar || docker pull prom/prometheus:v2.19.2
+[ -f grafana-7.1.3.linux-amd64.tar.gz ]     || wget https://dl.grafana.com/oss/release/grafana-7.1.3.linux-amd64.tar.gz
+[ -f prometheus-2.20.1.linux-amd64.tar.gz ] || wget https://github.com/prometheus/prometheus/releases/download/v2.20.1/prometheus-2.20.1.linux-amd64.tar.gz
+tar xzf grafana-7.1.3.linux-amd64.tar.gz     -C /home/vagrant
+tar xzf prometheus-2.20.1.linux-amd64.tar.gz -C /home/vagrant

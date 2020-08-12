@@ -3,4 +3,4 @@
 data/*
 packages/*.deb
 packages/*.tar
-
+packages/*.tar.gz

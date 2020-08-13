@@ -13,7 +13,10 @@ Vagrant.configure("2") do |config|
   config.vm.box_check_update = false
   config.vm.provider "virtualbox" do |vb|
     vb.memory = "1024"
-    vb.cpus = 1
+    vb.cpus = 2
+    # patch settings for latest official ubuntu box, reference: https://github.com/hashicorp/vagrant/issues/11777
+    vb.customize ["modifyvm", :id, "--uart1", "0x3F8", "4"]
+    vb.customize ["modifyvm", :id, "--uartmode1", "file", File::NULL]
   end
 
   # 1. shared data and packages to be installed
@@ -56,7 +59,7 @@ Vagrant.configure("2") do |config|
   end
 
   # 6. worker nodes
-  (1..3).each do |i|
+  (1..2).each do |i|
     config.vm.define "node#{i}" do |node|
       node.vm.network "private_network", ip: "192.168.33.#{i + IP0}"
       node.vm.hostname = "node#{i}"

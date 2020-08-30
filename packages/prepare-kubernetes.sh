@@ -1,6 +1,7 @@
 #!/bin/bash
 IMAGES=""
 
+# Prepare different image sets for controller and worker node
 if [ $HOSTNAME == "controller" ]; then
     IMAGES="`kubeadm config images list --config kubeadm.conf` quay.io/coreos/flannel:v0.12.0-amd64"
 else
@@ -11,6 +12,7 @@ else
     """
 fi
 
+# Pull kubernetes images with local cache
 for image in $IMAGES; do
     _image=${image//\//_}
     imageFile="/packages/${_image//:/\~}.tar"
@@ -22,6 +24,7 @@ for image in $IMAGES; do
     fi
 done
 
+# File needed by flannel
 cat << EOF > /run/flannel/subnet.env
 FLANNEL_NETWORK=10.244.0.0/16
 FLANNEL_SUBNET=10.244.0.1/24

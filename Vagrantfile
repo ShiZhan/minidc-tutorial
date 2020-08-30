@@ -67,7 +67,7 @@ Vagrant.configure("2") do |config|
       node.vm.provision "shell", inline: <<-SHELL
         echo "This is node#{i}" > /etc/motd
         set -x
-        cd /packages && . ./install-worker.sh
+        cd /packages && . ./install-node.sh
       SHELL
     end
   end

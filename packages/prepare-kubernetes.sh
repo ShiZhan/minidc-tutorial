@@ -3,16 +3,29 @@ IMAGES=""
 
 # Prepare different image sets for controller and worker node
 if [ $HOSTNAME == "controller" ]; then
-    IMAGES="`kubeadm config images list --config kubeadm.conf` quay.io/coreos/flannel:v0.12.0-amd64"
-else
+    # "kubeadm config images list --config kubeadm.conf" & "quay.io/coreos/flannel:v0.12.0-amd64"
     IMAGES="""
+        registry.aliyuncs.com/google_containers/coredns:1.6.7
+        registry.aliyuncs.com/google_containers/etcd:3.4.3-0
+        registry.aliyuncs.com/google_containers/kube-apiserver:v1.18.4
+        registry.aliyuncs.com/google_containers/kube-controller-manager:v1.18.4
+        registry.aliyuncs.com/google_containers/kube-scheduler:v1.18.4
         registry.aliyuncs.com/google_containers/kube-proxy:v1.18.4
         registry.aliyuncs.com/google_containers/pause:3.2
         quay.io/coreos/flannel:v0.12.0-amd64
     """
+else
+    # worker node images and test images (alpine and nginx)
+    IMAGES="""
+        registry.aliyuncs.com/google_containers/kube-proxy:v1.18.4
+        registry.aliyuncs.com/google_containers/pause:3.2
+        quay.io/coreos/flannel:v0.12.0-amd64
+        alpine:3.12.0
+        nginx:1.19.2-alpine
+    """
 fi
 
-# Pull kubernetes images with local cache
+# Pull images with local cache
 for image in $IMAGES; do
     _image=${image//\//_}
     imageFile="/packages/${_image//:/\~}.tar"
@@ -23,11 +36,3 @@ for image in $IMAGES; do
         docker save $image -o $imageFile
     fi
 done
-
-# File needed by flannel
-cat << EOF > /run/flannel/subnet.env
-FLANNEL_NETWORK=10.244.0.0/16
-FLANNEL_SUBNET=10.244.0.1/24
-FLANNEL_MTU=1450
-FLANNEL_IPMASQ=true
-EOF

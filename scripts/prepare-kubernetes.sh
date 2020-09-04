@@ -28,7 +28,7 @@ fi
 # Pull images with local cache
 for image in $IMAGES; do
     _image=${image//\//_}
-    imageFile="/packages/${_image//:/\~}.tar"
+    imageFile="/vagrant/packages/${_image//:/\~}.tar"
     if [ -f $imageFile ]; then
         docker load -i $imageFile
     else

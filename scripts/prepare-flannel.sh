@@ -5,7 +5,7 @@ if [ `id -u` != "0" ]; then
 fi
 
 if [ $HOSTNAME == "controller" ]; then
-    kubectl apply -f kube-flannel.yml
+    kubectl apply -f /home/vagrant/conf/kube-flannel.yml
 fi
 
-cp subnet.env /run/flannel/
+cp /home/vagrant/conf/subnet.env /run/flannel/

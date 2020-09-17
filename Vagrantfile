@@ -30,7 +30,7 @@ Vagrant.configure("2") do |config|
     mv /home/vagrant/conf/sources.list /etc/apt/sources.list
 
     set -x
-    cd /vagrant/packages && . /vagrant/scripts/install-kubernetes.sh
+    . /vagrant/scripts/k8s-install.sh
     groupadd docker
     usermod -aG docker vagrant
     newgrp docker

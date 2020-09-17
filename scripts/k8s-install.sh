@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# docker
+# get docker packages
 PREFIX="https://mirrors.aliyun.com/docker-ce/linux/ubuntu/dists/focal/pool/stable/amd64/"
 PACKAGES="""
     containerd.io_1.2.13-2_amd64.deb
@@ -8,10 +8,10 @@ PACKAGES="""
     docker-ce_19.03.11~3-0~ubuntu-focal_amd64.deb
 """
 for p in $PACKAGES; do
-    [ -f "$p" ] || wget $PREFIX$p -nd
+    [ -f "/vagrant/packages/$p" ] || wget $PREFIX$p -O "/vagrant/packages/$p"
 done
 
-# k8s
+# get k8s packages
 PREFIX="https://mirrors.aliyun.com/"
 PACKAGES="""
     ubuntu/pool/main/s/socat/socat_1.7.3.4-1_amd64.deb
@@ -25,10 +25,11 @@ PACKAGES="""
     kubernetes/apt/pool/kubeadm_1.18.4-00_amd64_9c3d8514120d62b90e19d8ec13947fcbc9d56bed21d36dd3d2d314a4cd13f6bb.deb
 """
 for p in $PACKAGES; do
-    [ -f "${p##*/}" ] || wget $PREFIX$p -nd
+    [ -f "/vagrant/packages/${p##*/}" ] || wget $PREFIX$p -O "/vagrant/packages/${p##*/}"
 done
 
-dpkg -i \
+# install local packages
+(cd /vagrant/packages && dpkg -i \
     containerd.io_1.2.13-2_amd64.deb \
     docker-ce-cli_19.03.11~3-0~ubuntu-focal_amd64.deb \
     docker-ce_19.03.11~3-0~ubuntu-focal_amd64.deb \
@@ -41,3 +42,4 @@ dpkg -i \
     kubeadm_1.18.4-00_amd64_9c3d8514120d62b90e19d8ec13947fcbc9d56bed21d36dd3d2d314a4cd13f6bb.deb \
     kubectl_1.18.4-00_amd64_cc334c76c233820fd27906a86bb64fe7f833a629f6a08303f344dc7e76c0d66c.deb \
     kubelet_1.18.4-00_amd64_b240a3c0686125ac16c2fc4fd333c135a69b7b2b167345f2d45c4707411f9068.deb
+)

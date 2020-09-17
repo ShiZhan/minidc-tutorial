@@ -10,7 +10,7 @@
 
 # Bare metal monitoring
 
-| Script               | Usage                                                        |
-| -------------------- | ------------------------------------------------------------ |
-| dashboard-install.sh | Install Grafana and Prometheus with node-exporter            |
-| dashboard-run.sh     | Run Grafana and Prometheus (access via http://localhost:3000) |
+| Script               | Usage                                                             |
+| -------------------- | ----------------------------------------------------------------- |
+| dashboard-install.sh | Install Grafana and Prometheus with node-exporter                 |
+| dashboard-run.sh     | Run Grafana and Prometheus (access via http://192.168.33.20:3000) |

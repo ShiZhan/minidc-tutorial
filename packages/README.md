@@ -1,6 +1,6 @@
 # Packages cached
 
-Packages used in minidc experiment are all cached here.
+Packages used in minidc experiment are all cached in this folder ([download via weiyun](https://share.weiyun.com/wzoMXkis)).
 
 | Package | Description |
 | ------- | ----------- |

@@ -41,12 +41,6 @@ Vagrant.configure("2") do |config|
   config.vm.define "controller" do |controller|
     controller.vm.network "private_network", ip: "192.168.33.#{IP0}"
     controller.vm.hostname = "controller"
-
-    controller.vm.provision "shell", inline: <<-SHELL
-      echo "This is controller" > /etc/motd
-      set -x
-      cd /vagrant/packages && . /vagrant/scripts/install-controller.sh
-    SHELL
   end
 
   # 6. worker nodes
@@ -54,12 +48,6 @@ Vagrant.configure("2") do |config|
     config.vm.define "node#{i}" do |node|
       node.vm.network "private_network", ip: "192.168.33.#{i + IP0}"
       node.vm.hostname = "node#{i}"
-
-      node.vm.provision "shell", inline: <<-SHELL
-        echo "This is node#{i}" > /etc/motd
-        set -x
-        cd /vagrant/packages && . /vagrant/scripts/install-node.sh
-      SHELL
     end
   end
 end

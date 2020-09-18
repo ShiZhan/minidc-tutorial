@@ -8,9 +8,19 @@
 | k8s-copy-config.sh    | **STEP 2**: Put k8s cluster configuration files in place |
 | k8s-deploy-flannel.sh | **STEP 3**: Deploy flannel as pod network                |
 
+# Kubernetes dashboard
+
+| Script               | Usage                                                        |
+| -------------------- | ------------------------------------------------------------ |
+| k8sui-load-images.sh | **STEP 0**: Preload docker images for [k8s dashboard](https://github.com/kubernetes/dashboard) |
+| k8sui-deploy.sh      | **STEP 1**: Deploy k8s dashboard                             |
+| k8sui-admin-token.sh | **STEP 2**: Generate admin user and token for login          |
+| k8sui-run.sh         | **STEP 3**: Access Dashboard from your localhost             |
+
 # Bare metal monitoring
 
-| Script             | Usage                                                             |
-| ------------------ | ----------------------------------------------------------------- |
-| grafana-install.sh | Install Grafana and Prometheus with node-exporter                 |
+| Script             | Usage                                                        |
+| ------------------ | ------------------------------------------------------------ |
+| grafana-install.sh | Install [Grafana](https://grafana.com/) and [Prometheus](https://prometheus.io/) with [node-exporter](https://prometheus.io/download/#node_exporter) |
 | grafana-run.sh     | Run Grafana and Prometheus (access via http://192.168.33.20:3000) |
+

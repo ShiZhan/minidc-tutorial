@@ -40,6 +40,7 @@ Vagrant.configure("2") do |config|
   IP0 = 20
   config.vm.define "controller" do |controller|
     controller.vm.network "private_network", ip: "192.168.33.#{IP0}"
+    controller.vm.network "forwarded_port", guest: 8001, host: 8001 # access kubernetes dashboard via proxy
     controller.vm.hostname = "controller"
   end
 

@@ -7,17 +7,17 @@ if [ $HOSTNAME == "controller" ]; then
     IMAGES="""
         registry.aliyuncs.com/google_containers/coredns:1.6.7
         registry.aliyuncs.com/google_containers/etcd:3.4.3-0
-        registry.aliyuncs.com/google_containers/kube-apiserver:v1.18.4
-        registry.aliyuncs.com/google_containers/kube-controller-manager:v1.18.4
-        registry.aliyuncs.com/google_containers/kube-scheduler:v1.18.4
-        registry.aliyuncs.com/google_containers/kube-proxy:v1.18.4
+        registry.aliyuncs.com/google_containers/kube-apiserver:v1.18.9
+        registry.aliyuncs.com/google_containers/kube-controller-manager:v1.18.9
+        registry.aliyuncs.com/google_containers/kube-scheduler:v1.18.9
+        registry.aliyuncs.com/google_containers/kube-proxy:v1.18.9
         registry.aliyuncs.com/google_containers/pause:3.2
         quay.io/coreos/flannel:v0.12.0-amd64
     """
 else
     # worker node images and test images (alpine and nginx)
     IMAGES="""
-        registry.aliyuncs.com/google_containers/kube-proxy:v1.18.4
+        registry.aliyuncs.com/google_containers/kube-proxy:v1.18.9
         registry.aliyuncs.com/google_containers/pause:3.2
         quay.io/coreos/flannel:v0.12.0-amd64
         alpine:3.12.0

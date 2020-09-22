@@ -15,7 +15,7 @@
 | k8sui-load-images.sh | **STEP 0**: Preload docker images for [k8s dashboard](https://github.com/kubernetes/dashboard) |
 | k8sui-deploy.sh      | **STEP 1**: Deploy k8s dashboard                             |
 | k8sui-admin-token.sh | **STEP 2**: Generate admin user and token for login          |
-| k8sui-run.sh         | **STEP 3**: Access Dashboard from your localhost             |
+| k8sui-run.sh         | **STEP 3**: Access Dashboard from [localhost](http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/)                  |
 
 # Bare metal monitoring
 

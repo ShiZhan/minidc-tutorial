@@ -22,6 +22,7 @@ else
         quay.io/coreos/flannel:v0.12.0-amd64
         alpine:3.12.0
         nginx:1.19.2-alpine
+        busybox:1.32.0
     """
 fi
 

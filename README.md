@@ -1,15 +1,16 @@
 # Introduction
 
-3+1 nodes cluster, node image based on [ubuntu-focal](http://cloud-images.ubuntu.com/focal/20200618/focal-server-cloudimg-amd64-vagrant.box).
+2+1 nodes cluster, node image based on [ubuntu-focal](http://cloud-images.ubuntu.com/focal/20200618/focal-server-cloudimg-amd64-vagrant.box).
 
 Hosts:
 
 0. controller: 192.168.33.20
 1. node1:      192.168.33.21
 2. node2:      192.168.33.22
-3. node3:      192.168.33.23
 
 All machines are connected by a host-only network.
+
+Each with 1GB memory and 2 cores, for 4 core hosts, the minimal setup could be controller + node1. 
 
 ## Get and Manage Boxes
 

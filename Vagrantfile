@@ -41,6 +41,8 @@ Vagrant.configure("2") do |config|
   config.vm.define "controller" do |controller|
     controller.vm.network "private_network", ip: "192.168.33.#{IP0}"
     controller.vm.network "forwarded_port", guest: 8001, host: 8001 # access kubernetes dashboard via proxy
+    controller.vm.network "forwarded_port", guest: 3000, host: 3000 # access grafana
+    controller.vm.network "forwarded_port", guest: 9090, host: 9090 # access prometheus
     controller.vm.hostname = "controller"
   end
 
